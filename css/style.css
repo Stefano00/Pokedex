@@ -1,0 +1,59 @@
+body{
+    background-color: #e84848;
+}
+
+h2{
+    color:white;
+    text-align: center;
+}
+
+.navLogo{
+        height: 9vh;
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+        min-height: 40px;   
+}
+.Nav{
+    background-color: teal;
+    height: 9vh;
+    min-height: 50px;
+}
+
+.cartas{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3%;
+}
+
+.contenedor{
+    align-items: center;
+}
+
+.imagenCarta{
+    height: auto;
+    width: 60%;
+}
+
+.botones{
+    align-items: center;
+    display:flex;
+    justify-content: center;
+}
+.colorBoton{
+    background-color:#2a75bb;
+    color:white;
+    margin: 20px;
+
+}
+.graficoGrande{
+    margin:30px;
+    height: 570px; 
+    width: 600px;
+}
+
+
+
+
+
+
