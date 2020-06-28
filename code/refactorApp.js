@@ -4,6 +4,7 @@ var name="";
 var page="https://pokeapi.co/api/v2/pokemon/";
 var nPage="";
 var countPage=0;
+var countPokemon;
 
 
 //$(document).ready(function() {
@@ -34,6 +35,7 @@ var countPage=0;
        }
     });
 
+
     $('#botonSiguiente').click(function(){
        // console.log("pagina" + nPage);
        $(".result").empty();
@@ -57,8 +59,11 @@ var countPage=0;
          pageChange(nPage, countPage); 
      });
     
+     
     
+
 });
+
 
 function start(){
     firstAjax(page, countPage);
@@ -71,7 +76,7 @@ let i =0;
             '<div class="card row col-m cartas" style="width: 18rem;">'+
                 '<img id=imagen'+0+' class="card-img-top imagenCarta" src="..." alt="Card image cap">'+
                 '<div class="card-body">'+
-                    '<h5 class="card-title">'+name+'</h5>'+
+                    '<h5 class="card-title" id=name>'+name+'</h5>'+
                     '<ol>'+
                     '<li id=texto'+0+'></li>'+
                     '<li id=texto2'+0+'></li>'+
@@ -80,7 +85,6 @@ let i =0;
                     '<li id=texto5'+0+'></li>'+
                     '</ol>'+
                 '<div id="chartContainer'+0+'" style="height:200px; width:250px;"></div>'+
-            '<a href="#" class="btn btn-primary">Mostrar Pokemon</a>'+
             '</div>'
             );
             
@@ -96,6 +100,7 @@ let i =0;
            $.ajax({url:"https://pokeapi.co/api/v2/pokemon/"+name+"/", dataType:'json', success:function(respuesta){
             //console.log(respuesta);
             //console.log(respuesta.sprite.back_default);
+            $('#name').text(respuesta.name);
             $('#texto'+i).text("Orden: " + respuesta.order );
             $('#texto2'+i).text("Tamaño: " + respuesta.height/10 + " m" );
             $('#texto3'+i).text("Peso: " + respuesta.weight/10 +" Kg" );
@@ -144,7 +149,8 @@ function multiCall(respuesta, countPage){ //Se generan las cartas de los pokemon
     '<button type="button" id="botonSiguiente" class="btn btn-secondary colorBoton">Siguiente</button>'+
     '</div>');*/
 
-        for(let i=0; i<respuesta.results.length;i++){           
+        for(let i=0; i<respuesta.results.length;i++){  
+            countPokemon=i;         
             $('.result').append('<div class="card row col-m cartas" style="width: 18rem;">'+
             '<img id=imagen'+i+' class="card-img-top imagenCarta" src="..." alt="Card image cap">'+
             '<div class="card-body">'+
@@ -157,11 +163,35 @@ function multiCall(respuesta, countPage){ //Se generan las cartas de los pokemon
                 '<li id=texto5'+i+'></li>'+
             '</ol>'+
             '<div id="chartContainer'+i+'" style="height:200px; width:250px;"></div>'+
-            '<a href="#" class="btn btn-primary">Mostrar Pokemon</a>'+
+            '<button type="button" class="btn btn-secondary botonPokemon colorBoton">Mostrar Pokemon</button>'+
             '</div>'
             );           
+
+            $('.botonPokemon:last').on("click",function(){
+                console.log("Apreté boton");
+               // for(let k=countPage;k<countPage+20;k++){
+                   /* if(countPokemon==i){
+                        name=i;
+                        console.log(name);
+                        if(name==""){
+                            $(".result").empty();
+                            $('.botones').show();
+                            start();
+                           }
+                        else{*/
+                            $(".result").empty();
+                            $(".botones").hide();
+                            individualCall(i+1+countPage);         
+                  //  }
+               // }  
+                //}              
+            });
+
+
             secondAjax(i, countPage);
         }
+
+      
 
 
 }
@@ -270,3 +300,4 @@ function chartPokemon(status){
     
     chart.render();
     }
+
