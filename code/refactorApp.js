@@ -19,6 +19,7 @@ var countPokemon;
         countPage=0;
       //  localStorage.setItem("name", $('#pokemonIngresado').val());
         name = $('#pokemonIngresado').val();
+        name=name.toLowerCase();
        // $('#nombrePokemonIngresado').text(name);
        console.log(name);
        if(name==""){
@@ -105,9 +106,11 @@ let i =0;
             $('#texto2'+i).text("Tamaño: " + respuesta.height/10 + " m" );
             $('#texto3'+i).text("Peso: " + respuesta.weight/10 +" Kg" );
             $('#texto4'+i).text("Tipo 1: " + respuesta.types[0].type.name );
+            
             if(respuesta.types[1]==null){
                 $('#texto5'+i).text("Tipo 2: " + respuesta.types[0].type.name );
             }
+
             else{
                 
                 $('#texto5'+i).text("Tipo 2: " + respuesta.types[1].type.name );
